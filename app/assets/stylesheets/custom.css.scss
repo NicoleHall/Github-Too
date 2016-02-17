@@ -1,2 +1,47 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+
+body {
+    background-image: url("octocat.png");
+}
+
+.square {
+
+  background-color: yellow;
+    padding-top: 200px;
+    padding: 25px;
+    border: 15px solid navy;
+    margin: 25px;
+    padding-right: 20px;
+    padding-left: 20px;
+    width: 300px;
+}
+
+.center {
+    background-color: yellow;
+    margin: auto;
+    width: 25%;
+    border: 3px solid #008B00;
+    padding: 10px;
+}
+
+.text-in-the-middle {
+  text-align: center;
+}
+
+CSS   Result
+Edit
+.container {
+ position: relative;
+ height: 14rem;
+ border: 1px solid;
+}
+
+.jumbotron {
+ position: absolute;
+ top: 50%;
+ left:50%;
+ transform: translate(-50%,-50%);
+ border: 3px solid #008B00;
+}
