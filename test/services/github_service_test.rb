@@ -5,8 +5,7 @@ class GithubServiceTest < ActiveSupport::TestCase
   test "#followers_count" do
     VCR.use_cassette('github_service_followers_count') do
       user = create_nicole
-      followers = GithubService.new(user).followers_count
-      assert_equal 12, followers
+      assert_equal 12, GithubService.new(user).followers_count
     end
   end
 
@@ -22,12 +21,16 @@ class GithubServiceTest < ActiveSupport::TestCase
   test "#starred_repos_count" do
     VCR.use_cassette('github_service_starred_repos_count') do
       user = create_nicole
-      starred_repos = GithubService.new(user).starred_repos_count
-      assert_equal 0, starred_repos
+      assert_equal 0, GithubService.new(user).starred_repos_count
     end
   end
 
-
+  test "#following_count" do
+    VCR.use_cassette('github_service_following_count') do
+      user = create_nicole
+      assert_equal 8, GithubService.new(user).following_count
+    end
+  end
 
 
 end
