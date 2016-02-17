@@ -32,5 +32,14 @@ class GithubServiceTest < ActiveSupport::TestCase
     end
   end
 
+  test "#following_list" do
+    VCR.use_cassette('github_service_following_list') do
+      user = create_nicole
+      following_list = GithubService.new(user).following_list
+      assert_equal "JoshCheek", following_list.first[0]
+      assert_equal "https://github.com/JoshCheek", following_list.first[1]
+    end
+  end
+
 
 end
