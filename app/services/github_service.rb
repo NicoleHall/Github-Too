@@ -24,6 +24,17 @@ class GithubService
     parse(conn.get("users/#{user.nickname}/starred")).count
   end
 
+  def following_count
+    parse(conn.get("/users/#{user.nickname}/following")).count
+  end
+
+  def following_list
+    following = parse(conn.get("/users/#{user.nickname}/following"))
+    names = following.map { |followed| followed["login"] }
+    url = following.map { |followed| followed["html_url"] }
+    names.zip(url)
+  end
+
   def parse(response)
     JSON.parse(response.body)
   end
