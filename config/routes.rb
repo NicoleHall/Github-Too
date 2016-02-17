@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resource :user
+  resources :users, only: [:show]
 
   get 'home/show'
 
