@@ -1,3 +1,9 @@
 <div class="jumbotron text-in-the-middle yellow">
  <h4>You Have <%= @followers %> Followers</h4>
+ <h4>You Have <%= @starred_repos_count %> Starred Repos</h4>
+ <p><% @followers_details.each do |follower| %>
+   You Follow <%= follower[0] %>.
+   <a href="<%= follower[1]%>" target="_blank">See <%= follower[0] %>'s work</a><br>
+<% end %>
+ </p>
 </div>

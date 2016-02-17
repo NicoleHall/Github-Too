@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
 
   def show
-    @followers = GithubService.new.followers_count(current_user)
-
+    @followers = current_github_service.followers_count
+    @followers_details =  current_github_service.followers_details
+    @starred_repos_count = current_github_service.starred_repos_count
   end
 
 end

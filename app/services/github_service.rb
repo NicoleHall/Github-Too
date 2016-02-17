@@ -1,19 +1,27 @@
 
 class GithubService
-  attr_reader :conn
+  attr_reader :conn, :user
 
-  def initialize
-
-  @conn = Faraday.new(:url => 'https://api.github.com') do |faraday|
-   faraday.request  :url_encoded             # form-encode POST params
-   faraday.response :logger                  # log requests to STDOUT
-   faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+  def initialize(user)
+    @user = user
+    @conn = Faraday.new(:url => 'https://api.github.com')
+    @conn.headers = {'Authorization' => "token #{user.token}"}
   end
- end
 
 
-  def followers_count(user)
+  def followers_count
     parse(conn.get("users/#{user.nickname}/followers")).count
+  end
+
+  def followers_details
+    followers = parse(conn.get("users/#{user.nickname}/followers"))
+    names = followers.map { |follower| follower["login"] }
+    url = followers.map { |follower| follower["html_url"] }
+    names.zip(url)
+  end
+
+  def starred_repos_count
+    parse(conn.get("users/#{user.nickname}/starred")).count
   end
 
   def parse(response)
