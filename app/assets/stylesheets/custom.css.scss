@@ -30,7 +30,8 @@ body {
   text-align: center;
 }
 
-
+CSS   Result
+Edit
 .container {
  position: relative;
  height: 14rem;
@@ -41,9 +42,11 @@ body {
  position: absolute;
  top: 50%;
  left:50%;
- padding-right: 50%;
- padding-left: 50%;
  transform: translate(-50%,-50%);
+ border: 3px solid #008B00;
+}
+
+.container-home {
   background-color: #1B3C59;
   min-height: 100vh;
   padding-top: 30vh;
@@ -85,6 +88,11 @@ img.img-circle.img-thumbnail.home-image {
   border-radius: 25px;
 }
 
-li{
+.toppush {
+ top: 70px;
+
+}
+
+li {
   text-align: left;
 }
