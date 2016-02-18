@@ -7,6 +7,8 @@ class UsersController < ApplicationController
     @following_count = current_github_service.following_count
     @following_list = current_github_service.following_list
     @longest_streak = current_github_service.longest_streak
+    @current_streak = current_github_service.current_streak
+    @contributions = current_github_service.contributions
 
     # Presenter Pattern
     # @DashboardUser = DashboardPresenter.new(current_user)

@@ -66,6 +66,16 @@ class GithubService
     doc.xpath('//*[@id="contributions-calendar"]/div[4]/span[2]').text
   end
 
+  def current_streak
+    doc = Nokogiri::HTML(open("https://github.com/#{user.nickname}"))
+    doc.xpath('//*[@id="contributions-calendar"]/div[5]/span[2]').text
+  end
+
+  def contributions
+    doc = Nokogiri::HTML(open("https://github.com/#{user.nickname}"))
+    doc.xpath('//*[@id="contributions-calendar"]/div[3]/span[2]').text
+  end
+
   def parse(response)
     JSON.parse(response.body)
   end
