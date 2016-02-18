@@ -1,3 +1,5 @@
+require 'nokogiri'
+require 'open-uri'
 
 class GithubService
   attr_reader :conn, :user
@@ -49,14 +51,19 @@ class GithubService
     recents.map { |commit| commit["commit"]["message"] }.reverse
   end
 
-  def longest_streak
-    repos_url = parse(conn.get("users/#{user.nickname}"))["repos_url"]
-    commit_urls = parse(conn.get(repos_url)).map { |repo| repo["commits_url"] }
-    all_of_the_commits = commit_urls.map { |url| parse(conn.get(url[0..-7])) }.flatten
-    sorted_dates = all_of_the_commits.sort_by do |commit_object|
+  # def longest_streak
+  #   repos_url = parse(conn.get("users/#{user.nickname}"))["repos_url"]
+  #   commit_urls = parse(conn.get(repos_url)).map { |repo| repo["commits_url"] }
+  #   all_of_the_commits = commit_urls.map { |url| parse(conn.get(url[0..-7])) }.flatten
+  #   sorted_dates = all_of_the_commits.sort_by do |commit_object|
+  #
+  #   commit_object["commit"]["author"]["date"]
+  #   end
+  # end
 
-    commit_object["commit"]["author"]["date"]
-    end
+  def longest_streak
+    doc = Nokogiri::HTML(open("https://github.com/#{user.nickname}"))
+    doc.xpath('//*[@id="contributions-calendar"]/div[4]/span[2]').text
   end
 
   def parse(response)
