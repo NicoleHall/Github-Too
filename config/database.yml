@@ -81,5 +81,4 @@ test:
 production:
   <<: *default
   database: github_too_production
-  username: github_too
-  password: <%= ENV['GITHUB_TOO_DATABASE_PASSWORD'] %>
+  
