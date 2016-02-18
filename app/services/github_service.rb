@@ -38,14 +38,12 @@ class GithubService
   def most_recent_repo
     all_repos = parse(conn.get("/users/#{user.nickname}/repos"))
     sorted_repos = all_repos.sort_by do |repo|
-      repo["updated_at"]
+      repo["pushed_at"]
     end
-    sorted_repos.last
+    sorted_repos.last["name"]
   end
 
   def commits_for_current_user
-    #View a summary feed of my recent activity (recent commits)
-
     commits = parse(conn.get("repos/#{user.nickname}/#{most_recent_repo["name"]}/commits"))
     messages = commits.map { |commit| commit["commit"]["message"] }
 
@@ -56,7 +54,7 @@ class GithubService
     commit_urls = parse(conn.get(repos_url)).map { |repo| repo["commits_url"] }
     all_of_the_commits = commit_urls.map { |url| parse(conn.get(url[0..-7])) }.flatten
     sorted_dates = all_of_the_commits.sort_by do |commit_object|
-      require 'pry'; binding.pry
+
     commit_object["commit"]["author"]["date"]
     end
   end

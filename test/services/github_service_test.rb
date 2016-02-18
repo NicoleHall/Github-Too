@@ -47,12 +47,26 @@ class GithubServiceTest < ActiveSupport::TestCase
   end
 
   test "#longest_streak" do
+    skip
     VCR.use_cassette('github_service_longest_streak') do
       user = create_nicole
       longest_streak = GithubService.new(user).longest_streak
       assert_equal 5, longest_streak
    end
+  end
 
+  test "#most_recent_repo" do
+    VCR.use_cassette('gitserv_most_recent_repo') do
+      user = create_nicole
+      assert_equal "Github-Too", GithubService.new(user).most_recent_repo
+    end
+  end
+
+  test "#commits_for_current_user" do
+    skip
+    VCR.use_cassette('github_service_commits_for_crnt_usr') do
+      user = create_nicole
+    end
   end
 
 
