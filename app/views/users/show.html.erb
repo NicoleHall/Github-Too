@@ -18,8 +18,11 @@
   <% end %>
  </p>
 
- <% @most_recent_repo.each do |repo| %>
- <%= repo %>
- <% end %>
+<h4><%= @most_recent_repo %> is the repo you've most recently pushed to</h4>
+<h4>And here are your very thoughtful commit messages</h4>
+<ol><% @messages.each do |message| %>
+  <li><%= message %></li>
+  <%end%>
+</ol>
 
 </div>
