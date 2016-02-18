@@ -24,6 +24,7 @@ gem 'figaro'
 gem 'omniauth-github'
 gem 'bootstrap-sass', '3.2.0.0'
 gem 'faraday'
+gem 'nokogiri'
 
 
 # Use ActiveModel has_secure_password
