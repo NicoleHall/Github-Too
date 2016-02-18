@@ -42,11 +42,9 @@ Edit
  position: absolute;
  top: 50%;
  left:50%;
+ padding-right: 50%;
+ padding-left: 50%;
  transform: translate(-50%,-50%);
- border: 3px solid #008B00;
-}
-
-.container-home {
   background-color: #1B3C59;
   min-height: 100vh;
   padding-top: 30vh;
@@ -86,4 +84,8 @@ img.img-circle.img-thumbnail.home-image {
   background-color: #FDF5E6;
   border: 3px solid #008B00;
   border-radius: 25px;
+}
+
+li{
+  text-align: left;
 }

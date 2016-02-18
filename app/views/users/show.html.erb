@@ -1,4 +1,4 @@
-<div class="jumbotron text-in-the-middle yellow">
+<div class=" text-in-the-middle yellow container">
   <h2><%=current_user.name%>'s Github Stats</h2>
  <h4>You Have <%= @starred_repos_count %> Starred Repos</h4>
  <h4>You Have <%= @followers %> Followers</h4>
@@ -18,11 +18,6 @@
   <% end %>
  </p>
 
-<h4><%= @most_recent_repo %> is the repo you've most recently pushed to</h4>
-<h4>And here are your very thoughtful commit messages</h4>
-<ol><% @messages.each do |message| %>
-  <li><%= message %></li>
-  <%end%>
-</ol>
-
+<button type="button" class="btn btn-warning"><%= link_to "See Commits", users_path%></button>
+<button type="button" class="btn btn-warning"><%= link_to "Logout", logout_path, method: :delete%></button>
 </div>

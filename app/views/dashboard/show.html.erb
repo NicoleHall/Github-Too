@@ -7,6 +7,7 @@
     <h2 class="home"> <%= current_user.email %> </h2>
     <%= link_to "Logout", "/logout", method: :delete, class: "btn btn-lg btn-default btn-home" %><br>
     <%= link_to "See Your Stats", user_path(current_user.id), class: "btn btn-lg btn-default btn-home" %>
+    <%= link_to "See Commits", users_path, class: "btn btn-lg btn-default btn-home" %>
   </div>
   <div class="col-md-2"></div>
 </div>

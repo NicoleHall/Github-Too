@@ -1,0 +1,18 @@
+<div style="position:fixed; top:20px; left:20px; right:20px;">
+<div class="text-in-the-middle yellow container">
+<div class="panel panel-default bootcards-richtext">
+ <div class="panel-heading">
+   <h3 class="panel-title"><%= @most_recent_repo %> is the repo you've most recently pushed to</h3>
+ </div>
+ <div class="panel-body">
+   <p class="lead">And here are your very thoughtful commit messages:</p>
+   <ul><% @messages.each do |message| %>
+     <li><%= message %></li>
+     <% end %>
+   </ul>
+   <button type="button" class="btn btn-warning"><%= link_to "See Stats", user_path(current_user.id)%></button>
+   <button type="button" class="btn btn-warning"><%= link_to "Logout", logout_path, method: :delete%></button>
+ </div>
+</div>
+</div>
+</div>
