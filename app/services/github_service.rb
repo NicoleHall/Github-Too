@@ -43,10 +43,10 @@ class GithubService
     sorted_repos.last["name"]
   end
 
-  def commits_for_current_user
-    commits = parse(conn.get("repos/#{user.nickname}/#{most_recent_repo["name"]}/commits"))
-    messages = commits.map { |commit| commit["commit"]["message"] }
-
+  def commits_for_most_recent_repo
+    commits = parse(conn.get("repos/#{user.nickname}/#{most_recent_repo}/commits"))
+    recents = commits.sort_by { |commit| commit["date"]}.first(10)
+    recents.map { |commit| commit["commit"]["message"] }.reverse
   end
 
   def longest_streak

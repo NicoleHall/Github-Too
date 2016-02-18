@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @starred_repos_count = current_github_service.starred_repos_count
     @following_count = current_github_service.following_count
     @following_list = current_github_service.following_list
-    @most_recent_repo = current_github_service.commits_for_current_user
+    @most_recent_repo = current_github_service.commits_for_most_recent_repo
 
     # Presenter Pattern
     # @DashboardUser = DashboardPresenter.new(current_user)

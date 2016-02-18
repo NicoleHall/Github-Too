@@ -62,12 +62,15 @@ class GithubServiceTest < ActiveSupport::TestCase
     end
   end
 
-  test "#commits_for_current_user" do
-    skip
-    VCR.use_cassette('github_service_commits_for_crnt_usr') do
+  test "#commits_for_most_recent_repo" do
+    VCR.use_cassette('gitsev_commits_recent_repo') do
       user = create_nicole
+      repo = "Github-Too"
+      commits = GithubService.new(user).commits_for_most_recent_repo
+      commit_message = "users controller has a show method and the GitHub Service has a followers count method"
+      assert_equal 10, commits.count
+      assert_equal commit_message, commits.first
     end
   end
-
 
 end
