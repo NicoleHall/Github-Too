@@ -28,6 +28,10 @@ body {
 
 .text-in-the-middle {
   text-align: center;
+  display: inline-block;
+  padding: 20px;
+  margin-left: 300px;
+  margin-right: 20px;
 }
 
 CSS   Result
@@ -95,4 +99,8 @@ img.img-circle.img-thumbnail.home-image {
 
 li {
   text-align: left;
+}
+
+th {
+  text-align: center;
 }

@@ -51,15 +51,22 @@ class GithubService
     recents.map { |commit| commit["commit"]["message"] }.reverse
   end
 
-  # def longest_streak
-  #   repos_url = parse(conn.get("users/#{user.nickname}"))["repos_url"]
-  #   commit_urls = parse(conn.get(repos_url)).map { |repo| repo["commits_url"] }
-  #   all_of_the_commits = commit_urls.map { |url| parse(conn.get(url[0..-7])) }.flatten
-  #   sorted_dates = all_of_the_commits.sort_by do |commit_object|
-  #
-  #   commit_object["commit"]["author"]["date"]
-  #   end
-  # end
+  def activity_of_followings
+    following = parse(conn.get("/users/#{user.nickname}/following"))
+    names = following.map { |followed| followed["login"] }
+    names.each { |name| parse(conn.get("/users/#{name}/events")) }
+
+    events = names.map { |name| parse(conn.get("users/#{name}/events")).sample(3)}.flatten
+    pushes = events.select { |event| event["type"] == "PushEvent"}
+    pushes.map do |push|
+      OpenStruct.new({
+        person: push["actor"]["login"],
+        repo: push["repo"]["name"],
+        comment: push["payload"]["commits"].first["message"][0..20]
+      })
+    end
+  end
+
 
   def longest_streak
     doc = Nokogiri::HTML(open("https://github.com/#{user.nickname}"))

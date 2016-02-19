@@ -7,17 +7,36 @@
  <h4>You Have <%= @followers %> Followers</h4>
 
 
+
+ <table frame="box" style="width:100%">
+   <tr>
+     <th>Person</th>
+     <th>Repo</th>
+     <th>Comment</th>
+   </tr>
+
+     <% @activity_of_followings.each do |activity| %>
+      <tr>
+        <td><%= activity.person %></td>
+        <td><%= activity.repo %></td>
+        <td><%= activity.comment %></td>
+      </tr>
+     <% end %>
+
+ </table>
+
+
  <p><% @followers_details.each do |follower| %>
    <%= follower[0] %> follows you
-   <a href="<%= follower[1]%>" target="_blank">See <%= follower[0] %>'s work</a><br>
+   <a href="<%= follower.last%>" target="_blank">See <%= follower.first %>'s work</a><br>
   <% end %>
  </p>
 
  <h4>You Are Following <%= @following_count %> Github Users</h4>
 
  <p><% @following_list.each do |followed| %>
-  You Follow<%= followed[0] %>
-   <a href="<%= followed[1]%>" target="_blank">See <%= followed[0] %>'s work</a><br>
+  You Follow <%= followed.first %>
+   <a href="<%= followed.last%>" target="_blank">See <%= followed.first %>'s work</a><br>
   <% end %>
  </p>
 
