@@ -6,11 +6,6 @@
  <h4>Your Contributions This Year: <%= @contributions %> </h4>
  <h4>You Have <%= @followers %> Followers</h4>
 
-
-
-
-
-
  <p><% @followers_details.each do |follower| %>
    <%= follower[0] %> follows you
    <a href="<%= follower.last%>" target="_blank">See <%= follower.first %>'s work</a><br>

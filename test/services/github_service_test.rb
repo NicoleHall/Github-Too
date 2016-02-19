@@ -63,9 +63,16 @@ class GithubServiceTest < ActiveSupport::TestCase
   test "#activity_of_followings" do
     VCR.use_cassette('gitserv_activity_of_followings') do
       user = create_nicole
-      assert_equal "JoshCheek", GithubService.new(user).activity_of_followings.first.person
+      first_result = GithubService.new(user).activity_of_followings.first.person
+      assert_equal "JoshCheek", first_result
     end
   end
 
+  test "#my_repositories" do
+    VCR.use_cassette('gitserv_my_repositories') do
+      user = create_nicole
+      assert_equal "Github-Too", GithubService.new(user).my_repositories.first
+    end
+  end
 
 end

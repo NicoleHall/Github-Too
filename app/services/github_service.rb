@@ -67,6 +67,15 @@ class GithubService
     end
   end
 
+  def my_repositories
+    all_repos = parse(conn.get("users/#{user.nickname}/repos"))
+    sorted_repos = all_repos.sort_by do |repo|
+      repo["pushed_at"]
+    end
+    sorted_repos.reverse.map do |repo|
+      repo["name"]
+    end
+  end
 
   def longest_streak
     doc = Nokogiri::HTML(open("https://github.com/#{user.nickname}"))
