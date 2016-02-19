@@ -77,6 +77,11 @@ class GithubService
     end
   end
 
+  def my_organizations
+    orgs = parse(conn.get("users/#{user.nickname}/orgs"))
+    orgs.map { |org| org["login"] }
+  end
+
   def longest_streak
     doc = Nokogiri::HTML(open("https://github.com/#{user.nickname}"))
     doc.xpath('//*[@id="contributions-calendar"]/div[4]/span[2]').text

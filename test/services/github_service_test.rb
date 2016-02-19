@@ -75,4 +75,11 @@ class GithubServiceTest < ActiveSupport::TestCase
     end
   end
 
+  test "#my_organizations" do
+    VCR.use_cassette('gitserv_my_organizations') do
+      user = create_nicole
+      assert_equal 0, GithubService.new(user).my_organizations.count
+    end
+  end
+
 end

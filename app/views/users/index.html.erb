@@ -23,9 +23,20 @@
           <li><%= message %></li>
           <% end %>
         </ul>
-        <button type="button" class="btn btn-warning"><%= link_to "See Stats", user_path(current_user.id)%></button>
-        <button type="button" class="btn btn-warning"><%= link_to "Logout", logout_path, method: :delete%></button>
+
+        <div class="panel panel-default bootcards-richtext">
+          <div class="panel-heading">
+            <h3 class="panel-title">You Belong to <%=@my_organizations.count%> Organizations</h3>
+          </div>
+          <div class="panel-body">
+            <ul><% @my_organizations.each do |org| %>
+              <li><%= org %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
+<button type="button" class="btn btn-warning"><%= link_to "See Stats", user_path(current_user.id)%></button>
+<button type="button" class="btn btn-warning"><%= link_to "Logout", logout_path, method: :delete%></button>

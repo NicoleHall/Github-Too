@@ -21,6 +21,7 @@ class UsersController < ApplicationController
     @most_recent_repo = current_github_service.most_recent_repo
     @messages = current_github_service.commits_for_most_recent_repo
     @my_repos = current_github_service.my_repositories
+    @my_organizations = current_github_service.my_organizations
   end
 
 
