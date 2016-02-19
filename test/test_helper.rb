@@ -5,7 +5,8 @@ require 'minitest/pride'
 require 'webmock'
 require 'vcr'
 require 'simplecov'
-SimpleCov.start
+require "capybara/rails"
+SimpleCov.start('rails')
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -26,5 +27,30 @@ class ActiveSupport::TestCase
     name: "Nicole Hall",
     image: "https://avatars.githubusercontent.com/u/11447286?v=3",
     token: "6a21db5cb96be52f4d0acbd4d8410ca0f6b74e0e")
+  end
+end
+
+class ActionDispatch::IntegrationTest
+  include Capybara::DSL
+  def setup
+    Capybara.app = GithubToo::Application
+    stub_omniauth
+  end
+
+  def stub_omniauth
+
+    OmniAuth.config.test_mode = true
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
+      provider: "github",
+          uid: "1234",
+          info:
+            {nickname: "NicoleHall",
+            email: "nicolealexandrahall@gmail.com",
+            name: "Nicole Hall",
+            image: "https://avatars.githubusercontent.com/u/11447286?v=3"},
+            urls:
+              {GitHub: "https://github.com/NicoleHall"}},
+            credentials:
+          {token: "6a21db5cb96be52f4d0acbd4d8410ca0f6b74e0e", expires: false})
   end
 end
