@@ -32,6 +32,7 @@ class GithubServiceTest < ActiveSupport::TestCase
     end
   end
 
+#if this test fails, delete the cassette.
   test "#following_list" do
     VCR.use_cassette('github_service_following_list') do
       user = create_nicole
@@ -39,15 +40,6 @@ class GithubServiceTest < ActiveSupport::TestCase
       assert_equal "JoshCheek", following_list.first[0]
       assert_equal "https://github.com/JoshCheek", following_list.first[1]
     end
-  end
-
-  test "#longest_streak" do
-    skip
-    VCR.use_cassette('github_service_longest_streak') do
-      user = create_nicole
-      longest_streak = GithubService.new(user).longest_streak
-      assert_equal 5, longest_streak
-   end
   end
 
   test "#most_recent_repo" do
@@ -71,8 +63,9 @@ class GithubServiceTest < ActiveSupport::TestCase
   test "#activity_of_followings" do
     VCR.use_cassette('gitserv_activity_of_followings') do
       user = create_nicole
-      assert_equal "", GithubService.new(user).activity_of_followings
+      assert_equal "JoshCheek", GithubService.new(user).activity_of_followings.first.person
     end
   end
+
 
 end
