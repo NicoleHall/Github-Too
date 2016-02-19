@@ -8,22 +8,7 @@
 
 
 
- <table frame="box" style="width:100%">
-   <tr>
-     <th>Person</th>
-     <th>Repo</th>
-     <th>Comment</th>
-   </tr>
 
-     <% @activity_of_followings.each do |activity| %>
-      <tr>
-        <td><%= activity.person %></td>
-        <td><%= activity.repo %></td>
-        <td><%= activity.comment %></td>
-      </tr>
-     <% end %>
-
- </table>
 
 
  <p><% @followers_details.each do |follower| %>
@@ -39,6 +24,25 @@
    <a href="<%= followed.last%>" target="_blank">See <%= followed.first %>'s work</a><br>
   <% end %>
  </p>
+ <br>
+
+<h3>Recent Activity of the People You Follow</h3>
+ <table frame="box" style="width:100%">
+   <tr>
+     <th>Person</th>
+     <th>Repo Name</th>
+     <th>Comment</th>
+   </tr>
+
+     <% @activity_of_followings.each do |activity| %>
+      <tr>
+        <td><%= activity.person %></td>
+        <td><%= activity.repo %></td>
+        <td><%= activity.comment %></td>
+      </tr>
+     <% end %>
+ </table>
+ <br>
 
 <button type="button" class="btn btn-warning"><%= link_to "See Commits", users_path%></button>
 <button type="button" class="btn btn-warning"><%= link_to "Logout", logout_path, method: :delete%></button>

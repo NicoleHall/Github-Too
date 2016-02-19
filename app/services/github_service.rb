@@ -61,8 +61,8 @@ class GithubService
     pushes.map do |push|
       OpenStruct.new({
         person: push["actor"]["login"],
-        repo: push["repo"]["name"],
-        comment: push["payload"]["commits"].first["message"][0..20]
+        repo: push["repo"]["name"][0..50],
+        comment: push["payload"]["commits"].first["message"][0..120]
       })
     end
   end
