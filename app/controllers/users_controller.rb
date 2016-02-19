@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   def index
     @most_recent_repo = current_github_service.most_recent_repo
     @messages = current_github_service.commits_for_most_recent_repo
+    @my_repos = current_github_service.my_repositories
   end
 
 
