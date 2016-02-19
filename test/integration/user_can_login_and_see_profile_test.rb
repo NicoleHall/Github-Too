@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UserCanLogInTest < ActionDispatch::IntegrationTest
+class UserCanLogInAndSeeProfileTest < ActionDispatch::IntegrationTest
 
   test "user can login" do
     user = create_nicole

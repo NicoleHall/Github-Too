@@ -11,10 +11,6 @@ class UsersController < ApplicationController
     @contributions = current_github_service.contributions
     @activity_of_followings =current_github_service.activity_of_followings
 
-    # Presenter Pattern
-    # @DashboardUser = DashboardPresenter.new(current_user)
-          # DashboardPresenter.followers
-          # DashboardPresenter.followers_details
   end
 
   def index
