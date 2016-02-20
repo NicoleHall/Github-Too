@@ -32,26 +32,27 @@ class GithubService
 
   def following_list
     following = parse(conn.get("/users/#{user.nickname}/following"))
-    names = following.map { |followed| followed["login"] }
-    url = following.map { |followed| followed["html_url"] }
-    names.zip(url)
+
+
+    following.map { |followed| [followed["login"], followed["html_url"]] }
+    # names = following.map { |followed| followed["login"] }
+    # url = following.map { |followed| followed["html_url"] }
+    # names.zip(url)
   end
 
   def most_recent_repo
     all_repos = parse(conn.get("/users/#{user.nickname}/repos"))
-    sorted_repos = all_repos.sort_by do |repo|
-      repo["pushed_at"]
-    end
-    sorted_repos.last["name"]
+    sorted_repos = all_repos.sort_by { |repo| repo["pushed_at"] }.last["name"]
   end
 
   def commits_for_most_recent_repo
-    commits = parse(conn.get("repos/#{user.nickname}/#{most_recent_repo}/commits"))
-    recents = commits.sort_by { |commit| commit["date"]}.first(10)
-    recents.map { |commit| commit["commit"]["message"] }.reverse
+    parse(conn.get("repos/#{user.nickname}/#{most_recent_repo}/commits"))
+          .sort_by { |commit| commit["date"]}.first(10)
+          .map { |commit| commit["commit"]["message"] }.reverse
   end
 
   def activity_of_followings
+    # separate method
     following = parse(conn.get("/users/#{user.nickname}/following"))
     names = following.map { |followed| followed["login"] }
     names.each { |name| parse(conn.get("/users/#{name}/events")) }
@@ -93,9 +94,12 @@ class GithubService
   end
 
   def contributions
+    scrape(3)
+
     doc = Nokogiri::HTML(open("https://github.com/#{user.nickname}"))
     doc.xpath('//*[@id="contributions-calendar"]/div[3]/span[2]').text
   end
+ 
 
   def parse(response)
     JSON.parse(response.body)

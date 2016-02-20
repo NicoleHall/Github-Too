@@ -26,7 +26,7 @@ class ActiveSupport::TestCase
     email: "nicolealexandrahall@gmail.com",
     name: "Nicole Hall",
     image: "https://avatars.githubusercontent.com/u/11447286?v=3",
-    token: "6a21db5cb96be52f4d0acbd4d8410ca0f6b74e0e")
+    token: ENV["test_user_token"])
   end
 end
 
@@ -51,6 +51,6 @@ class ActionDispatch::IntegrationTest
             urls:
               {GitHub: "https://github.com/NicoleHall"}},
             credentials:
-          {token: "6a21db5cb96be52f4d0acbd4d8410ca0f6b74e0e", expires: false})
+          {token: ENV["test_user_token"], expires: false})
   end
 end

@@ -3,7 +3,7 @@ require './test/test_helper'
 class GithubServiceTest < ActiveSupport::TestCase
 
   test "#followers_count" do
-    VCR.use_cassette('github_service_followers_count') do
+    VCR.use_cassette('github_service#followers_count') do
       user = create_nicole
       assert_equal 12, GithubService.new(user).followers_count
     end
@@ -51,10 +51,16 @@ class GithubServiceTest < ActiveSupport::TestCase
 
   test "#commits_for_most_recent_repo" do
     VCR.use_cassette('gitsev_commits_recent_repo') do
+      # setup --> before(:each)
+      # execution
+      # # assertions
+
       user = create_nicole
       repo = "Github-Too"
+
       commits = GithubService.new(user).commits_for_most_recent_repo
       commit_message = "users controller has a show method and the GitHub Service has a followers count method"
+
       assert_equal 10, commits.count
       assert_equal commit_message, commits.first
     end

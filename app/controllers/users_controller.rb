@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
 
   def show
+    # @user_show_info = current_github_service.get_user_info
+    # @user_show_info['followers_count']
+
     @followers = current_github_service.followers_count
     @followers_details =  current_github_service.followers_details
     @starred_repos_count = current_github_service.starred_repos_count
@@ -19,6 +22,5 @@ class UsersController < ApplicationController
     @my_repos = current_github_service.my_repositories
     @my_organizations = current_github_service.my_organizations
   end
-
 
 end
